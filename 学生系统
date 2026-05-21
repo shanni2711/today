@@ -1,0 +1,76 @@
+
+students = [] 
+
+def get_student_info():
+    print("\n录入学生信息")
+    while True:
+        name = input("请输入学生姓名（输入 q 退出）：")
+        if name == "q":
+            break
+        try:
+            score = float(input(f"请输入{name}的分数："))
+            if 0 <= score <= 100:
+                students.append({"name": name, "score": score})
+                print(f"{name} 信息录入成功")
+            else:
+                print("分数必须在 0-100 之间")
+        except:
+            print("输入格式错误，请输入数字")
+
+def calculate_score():
+    if len(students) == 0:
+        print("\n还没有学生信息")
+        return
+
+    scores = [s["score"] for s in students]
+    avg = sum(scores) / len(scores)
+    max_score = max(scores)
+    min_score = min(scores)
+
+    print("\n成绩统计")
+    print(f"平均分：{avg:.2f}")
+    print(f"最高分：{max_score}")
+    print(f"最低分：{min_score}")
+
+def grade_students():
+    if len(students) == 0:
+        print("\n还没有学生信息")
+        return
+
+    print("\n学生等级划分")
+    for s in students:
+        score = s["score"]
+        if 90 <= score <= 100:
+            level = "A"
+        elif 80 <= score < 90:
+            level = "B"
+        elif 70 <= score < 80:
+            level = "C"
+        elif 60 <= score < 70:
+            level = "D"
+        else:
+            level = "E"
+        print(f"姓名：{s['name']}   分数：{s['score']}   等级：{level}")
+
+def main():
+    while True:
+        print("\n学生管理系统")
+        print("1. 录入学生信息")
+        print("2. 查看平均分、最高分、最低分")
+        print("3. 查看学生等级")
+        print("4. 退出系统")
+        
+        choice = input("请输入功能编号：")
+        
+        if choice == "1":
+            get_student_info()
+        elif choice == "2":
+            calculate_score()
+        elif choice == "3":
+            grade_students()
+        elif choice == "4":
+            print("退出系统")
+            break
+
+if __name__ == "__main__":
+    main()
