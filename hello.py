@@ -17,7 +17,7 @@ class BookManager:
 
     def write_log(self, msg):
         now = time.strftime("%Y-%m-%d %H:%M:%S")
-        with open("student_log.txt", "a", encoding="utf-8") as f:
+        with open("book_log.txt", "a", encoding="utf-8") as f:
             f.write(f"[{now}] {msg}\n")
 
     def show_all(self):
