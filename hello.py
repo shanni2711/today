@@ -64,7 +64,11 @@ class BookManager:
             self.conn.rollback()
             print("请输入正确信息")
 
-    def delete_book(self,book_id):
+    def delete_book(self,book_id):#删除前再确认一遍
+        confirm = input(f"确定要删除图书ID {book_id} 吗？(确认删除/取消)：")
+        if confirm != "确认删除" :
+            print("已取消删除")
+            return
         try:
             sql="delete from book where book_id=%s"
             self.cursor.execute(sql,book_id)
@@ -77,6 +81,7 @@ class BookManager:
         except Exception as e:
             self.conn.rollback()
             print("请输入正确信息：",e)
+
 
     def borrow_book(self,book_id):
         sql="select book_status from book where book_id=%s"
